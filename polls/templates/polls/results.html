@@ -1,0 +1,36 @@
+{% include "./header.html" %}
+			<div class="row">
+				<div class="col">
+					<h1>Results - {{ question.question_text }}</h1>
+				</div>
+			</div>
+			
+			{% if messages %}
+				<div class="row">
+					<div class="col">
+						{% for message in messages %}
+							<!--style message according to its level-->
+							<span {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}class="font-weight-bold text-success"{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}class="font-weight-bold text-danger"{% endif %}>{{ message }}</span>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+			
+			<div class="row">
+				<div class="col">
+					<ul>
+						{% for choice in question.choice_set.all %}
+							<li>{{ choice.choice_text }} -- {{ choice.vote_set.count }} vote{{ choice.vote_set.count|pluralize }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+				
+			<div class="row">
+				<div class="col">
+					<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+					<br />
+					<a href="{% url 'polls:index' %}">Back to Index</a>
+				</div>
+			</div>
+{% include "./footer.html" %}

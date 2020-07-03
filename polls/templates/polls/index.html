@@ -1,0 +1,20 @@
+{% include "./header.html" %}
+			<div class="row">
+				<div class="col">
+					<h1>Question Index</h1>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">
+					{% if question_list %}
+						<ul>
+						{% for question in question_list %}
+							<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+						{% endfor %}
+					{% else %}
+						<p>No polls are available.</p>
+					{% endif %}
+				</div>
+			</div>
+{% include "./footer.html" %}

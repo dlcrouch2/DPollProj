@@ -1,0 +1,36 @@
+{% include "./header.html" %}
+			<div class="row">
+				<div class="col">
+					<h1>Report - {{ question.question_text }}</h1>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">
+					{% if correct_votes != 0 and incorrect_votes != 0 %}
+						Correct votes: {{ correct_votes }}<br />
+						Incorrect votes: {{ incorrect_votes }}<br />
+					{% endif %}
+					Total votes: {{ total_votes }}<br />
+					<br />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">
+					<span class="font-weight-bold">Most Recent Vote</span><br />
+					Choice: {{ most_recent_vote.choice }}<br />
+					Name: {{ most_recent_vote.signature }}<br />
+					Timestamp: {{ most_recent_vote.datetime }}<br />
+					<br />
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">
+					<a href="{% url 'polls:detail' question.id %}">Back to Question</a>
+					<br />
+					<a href="{% url 'polls:index' %}">Back to Index</a>
+				</div>
+			</div>
+{% include "./footer.html" %}
